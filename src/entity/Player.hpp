@@ -1,5 +1,5 @@
-#ifndef PLAYER_HPP
-#define PLAYER_HPP
+#ifndef ENTITY_PLAYER_HPP
+#define ENTITY_PLAYER_HPP
 
 #include "Entity.hpp"
 #include "../input/KeyManager.hpp"

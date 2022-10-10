@@ -1,5 +1,5 @@
-#ifndef ENTITY_HPP
-#define ENTITY_HPP
+#ifndef ENTITY_ENTITY_HPP
+#define ENTITY_ENTITY_HPP
 
 #include "SFML/Graphics.hpp"
 #include "iostream"
@@ -16,8 +16,6 @@ class Entity{
         sf::Vector2f position;
         sf::Sprite *sprite;
         float scale;
-        int DEFAULT_SCALE;
-
 };
 
 #endif

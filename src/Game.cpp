@@ -130,6 +130,7 @@ void Game::render(){
     mWindow.draw(mPlayer);
     mWindow.draw(gasTank.getGasTank());
     mWindow.draw(asteroid.getAsteroid());
+    mWindow.draw(*asteroid.getSprite());
     mWindow.draw(mStatisticsText);
     mWindow.display();
 }
@@ -141,7 +142,8 @@ void Game::updateStatistics(sf::Time elapsedTime){
     if (mStatisticsUpdateTime >= sf::seconds(1.0f)){
         mStatisticsText.setString(
         "Frames / Second: " + std::to_string(mStatisticsNumFrames) + "\n" +
-        "Time / Update: " + std::to_string(mStatisticsUpdateTime.asMicroseconds() / mStatisticsNumFrames) + " us");
+        "Time / Update: " + std::to_string(mStatisticsUpdateTime.asMicroseconds() / mStatisticsNumFrames) + " us\n" +
+        "Player Speed: " + std::to_string((int)mPlayerCurrentSpeed));
 
         mStatisticsUpdateTime -= sf::seconds(1.0f);
         mStatisticsNumFrames = 0;
