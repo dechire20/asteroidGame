@@ -1,7 +1,7 @@
 #include "KeyManager.hpp"
 
 KeyManager::KeyManager(){
-    keys = new bool[1000];
+    
 }
 
 void KeyManager::update(){

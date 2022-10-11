@@ -90,6 +90,13 @@ void Game::processEvents(){
 }
 
 void Game::update(sf::Time elapsedTime){
+
+    keyManager.update();
+    gasTank.update(&keyManager);
+    asteroid.update(mPlayer.getPosition(), elapsedTime);
+
+
+
     sf::Vector2f movement(0.f, 0.f);
 
     // Player movement
@@ -106,16 +113,11 @@ void Game::update(sf::Time elapsedTime){
         movement.x += mPlayerCurrentSpeed;
     }
 
-    keyManager.update();
-    gasTank.update(keyManager);
-    asteroid.update(mPlayer.getPosition(), elapsedTime);
+    
 
     // Gauge functionality
     if (keyManager.boost && gasTank.getCurrentValue() >= 0) mPlayerCurrentSpeed += 3;
     else if (gasTank.getCurrentValue() <= gasTank.getMaxValue()) mPlayerCurrentSpeed = mPlayerSpeed;
-
-
-
 
     // Movement
     mPlayer.move(movement * elapsedTime.asSeconds());
@@ -129,7 +131,6 @@ void Game::render(){
     mWindow.clear();
     mWindow.draw(mPlayer);
     mWindow.draw(gasTank.getGasTank());
-    mWindow.draw(asteroid.getAsteroid());
     mWindow.draw(*asteroid.getSprite());
     mWindow.draw(mStatisticsText);
     mWindow.display();
@@ -143,7 +144,7 @@ void Game::updateStatistics(sf::Time elapsedTime){
         mStatisticsText.setString(
         "Frames / Second: " + std::to_string(mStatisticsNumFrames) + "\n" +
         "Time / Update: " + std::to_string(mStatisticsUpdateTime.asMicroseconds() / mStatisticsNumFrames) + " us\n" +
-        "Player Speed: " + std::to_string((int)mPlayerCurrentSpeed));
+        "Asteroid Speed: " + std::to_string((int)asteroid.getSpeed()));
 
         mStatisticsUpdateTime -= sf::seconds(1.0f);
         mStatisticsNumFrames = 0;

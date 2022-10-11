@@ -7,7 +7,7 @@
 class GasTank{
     public:
         GasTank();
-        void update(KeyManager mKeyManager);
+        void update(KeyManager *mKeyManager);
         float getMaxValue();
         float getCurrentValue();
         sf::RectangleShape getGasTank();

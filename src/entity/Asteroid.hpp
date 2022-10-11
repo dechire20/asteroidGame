@@ -5,16 +5,20 @@
 #include "../util/Math.hpp"
 #include "../gfx/ResourceHolder.hpp"
 #include "Entity.hpp"
+#include "random"
+#include "functional"
 
 class Asteroid : public Entity{
     public:
         void init(sf::Texture *textures);
         void update(sf::Vector2f targetPosition, sf::Time elapsedTime);
-        sf::Sprite getAsteroid(); 
+        float getSpeed();
+        Asteroid();
+
     private:
         sf::Sprite asteroid;
         Math math;
-        float speed;
+        int speed;
 };
 
 #endif

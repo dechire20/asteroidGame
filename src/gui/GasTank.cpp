@@ -13,8 +13,8 @@ GasTank::GasTank(){
     mGasTank.setPosition(30.f, 210.f);
 }
 
-void GasTank::update(KeyManager mKeyManager){
-    if (mKeyManager.boost && currentValue >= 0){
+void GasTank::update(KeyManager *mKeyManager){
+    if (mKeyManager->boost && currentValue >= 0){
         currentValue -= fuelCost;
     }
     else if (currentValue <= maxValue){
