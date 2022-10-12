@@ -1,48 +1,33 @@
 #include "Game.hpp"
 
-const sf::Vector2f screenSize {1000, 700};
+sf::Vector2f const screenSize{1000, 700};
 
 Game::Game():
 mWindow(sf::VideoMode(screenSize.x, screenSize.y), "Deliver the package", sf::Style::Close),
-mPlayer(),
 mStatisticsText(),
 mStatisticsNumFrames(0),
 mStatisticsUpdateTime(),
-mPlayerSpeed(300.f),
-mPlayerCurrentSpeed(mPlayerSpeed),
-textures(),
-fonts(),
 animation(),
 keyManager(),
 math(),
 gasTank(),
-asteroid()
+asteroid(),
+mPlayer(),
+textures(),
+fonts(),
+handler(this)
 {
-
-    // Load resources
     textures.load(Textures::Spaceship, "res/entity/player/Spaceship1.png");
     textures.load(Textures::Asteroid, "res/entity/objects/asteroid.png");
     textures.load(Textures::SmallStar, "res/background/smallStar.png");
     textures.load(Textures::MedStar, "res/background/medStar.png");
     fonts.load(Fonts::Sansation, "res/fonts/Sansation.ttf");
 
-    // Setup player
-    mPlayer.setTexture(textures.get(Textures::Spaceship));
-    animation.init(&textures.get(Textures::Spaceship), sf::Vector2u(2, 1), 0.2f); 
-    mPlayer.setScale(4.f, 4.f);
-    mPlayer.setPosition(screenSize.x / 2, screenSize.y / 2);
-    // change 4 to (arraySize * 2)
-    mPlayer.setOrigin(sf::Vector2f(mPlayer.getTexture()->getSize().x / 4, mPlayer.getTexture()->getSize().y / 4));
 
+    mPlayer.init(&handler, &textures.get(Textures::Spaceship));
     asteroid.init(&textures.get(Textures::Asteroid));
 
 
-    // Setup statistics text 
-    mStatisticsText.setFont(fonts.get(Fonts::Sansation));
-    mStatisticsText.setPosition(screenSize.x - 230, 10.f);
-    mStatisticsText.setCharacterSize(20);
-
-    // TODO: Setup stars
 }
 
 void Game::run(){
@@ -94,45 +79,16 @@ void Game::update(sf::Time elapsedTime){
     keyManager.update();
     gasTank.update(&keyManager);
     asteroid.update(mPlayer.getPosition(), elapsedTime);
+    mPlayer.update(elapsedTime);
 
 
-
-    sf::Vector2f movement(0.f, 0.f);
-
-    // Player movement
-    if (keyManager.up){
-        movement.y -= mPlayerCurrentSpeed;
-    }
-    if (keyManager.down){
-        movement.y += mPlayerCurrentSpeed;
-    }
-    if (keyManager.left){
-        movement.x -= mPlayerCurrentSpeed;
-    }
-    if (keyManager.right){
-        movement.x += mPlayerCurrentSpeed;
-    }
-
-    
-
-    // Gauge functionality
-    if (keyManager.boost && gasTank.getCurrentValue() >= 0) mPlayerCurrentSpeed += 3;
-    else if (gasTank.getCurrentValue() <= gasTank.getMaxValue()) mPlayerCurrentSpeed = mPlayerSpeed;
-
-    // Movement
-    mPlayer.move(movement * elapsedTime.asSeconds());
-
-    // Updates the animation
-    animation.update(0, elapsedTime.asSeconds());
-    mPlayer.setTextureRect(animation.uvRect);
 }
 
 void Game::render(){
     mWindow.clear();
-    mWindow.draw(mPlayer);
-    mWindow.draw(gasTank.getGasTank());
+    mWindow.draw(*mPlayer.getSprite());
     mWindow.draw(*asteroid.getSprite());
-    mWindow.draw(mStatisticsText);
+    mWindow.draw(gasTank.getGasTank());
     mWindow.display();
 }
 
@@ -149,4 +105,16 @@ void Game::updateStatistics(sf::Time elapsedTime){
         mStatisticsUpdateTime -= sf::seconds(1.0f);
         mStatisticsNumFrames = 0;
     }
+}
+
+sf::Vector2f Game::getScreenSize(){
+    return screenSize;
+}
+
+KeyManager Game::getKeyManager(){
+    return keyManager;
+}
+
+GasTank Game::getGasTank(){
+    return gasTank;
 }

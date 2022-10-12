@@ -11,11 +11,16 @@
 #include "gui/GasTank.hpp"
 #include "entity/Asteroid.hpp"
 #include "entity/Entity.hpp"
+#include "entity/Player.hpp"
+#include "Handler.hpp"
 
 class Game{
     public:
         Game();
         void run();
+        sf::Vector2f getScreenSize();
+        KeyManager getKeyManager();
+        GasTank getGasTank();
 
     private:
         void processEvents();
@@ -25,20 +30,19 @@ class Game{
     
     private:
         sf::RenderWindow mWindow;
-        sf::Sprite mPlayer;
         sf::Text mStatisticsText;
         sf::Time mStatisticsUpdateTime;
-        ResourceHolder<sf::Texture, Textures::ID> textures;
-        ResourceHolder<sf::Font, Fonts::ID> fonts;
         Animation animation;
         KeyManager keyManager;
         Math math;
         GasTank gasTank;
         Asteroid asteroid;
+        Player mPlayer;
+        Handler handler;
 
         std::size_t mStatisticsNumFrames;
-        float mPlayerSpeed;
-        float mPlayerCurrentSpeed; 
+        ResourceHolder<sf::Texture, Textures::ID> textures;
+        ResourceHolder<sf::Font, Fonts::ID> fonts;
 };
 #endif
 

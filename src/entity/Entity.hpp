@@ -2,7 +2,7 @@
 #define ENTITY_ENTITY_HPP
 
 #include "SFML/Graphics.hpp"
-#include "iostream"
+#include "../gfx/Animation.hpp"
 
 class Entity{
     public:
@@ -15,6 +15,7 @@ class Entity{
     protected:
         sf::Vector2f position;
         sf::Sprite *sprite;
+        Animation animation;
         float scale;
 };
 

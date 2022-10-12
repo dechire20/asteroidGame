@@ -1,7 +1,9 @@
 #include "KeyManager.hpp"
 
 KeyManager::KeyManager(){
-    
+    for (int i = 0; i < 1000; i++){
+        keys[i] = false;
+    }
 }
 
 void KeyManager::update(){

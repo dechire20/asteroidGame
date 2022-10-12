@@ -1,0 +1,9 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/dechire/Documents/workspace/asteroidGame",
+            "binaryPath": "/home/dechire/Documents/workspace/asteroidGame/main",
+            "binaryArgs": []
+        }
+    ]
+}

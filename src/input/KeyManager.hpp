@@ -10,7 +10,7 @@ class KeyManager{
         void update();
 
     private:
-        bool keys[1000]{false};
+        bool keys[5000]{false};
     public:
         bool left, right, up, down, boost;
 

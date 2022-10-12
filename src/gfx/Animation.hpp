@@ -5,7 +5,7 @@
 
 class Animation{
     public:
-        void init(sf::Texture* texture, sf::Vector2u imageCount, float switchTime);
+        void init(sf::Texture *texture, sf::Vector2u imageCount, float switchTime);
         void update(int row, float deltaTime);
     
     public:
