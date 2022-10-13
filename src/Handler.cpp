@@ -16,3 +16,7 @@ Game *Handler::getGame(){
 GasTank Handler::getGasTank(){
     return game->getGasTank();
 }
+
+sf::Vector2f Handler::getScreenSize(){
+    return game->getScreenSize();
+}

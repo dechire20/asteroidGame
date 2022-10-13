@@ -1,18 +1,17 @@
-/*#include "Assets.hpp"
-
+#include "Assets.hpp"
 
 Assets::Assets(){
-    textures.load(Textures::Spaceship, "../entity/player/Spaceship1.png");
-    textures.load(Textures::Asteroid, "../res/entity/objects/asteroid.png");
-    textures.load(Textures::SmallStar, "../res/background/smallStar.png");
-    textures.load(Textures::MedStar, "../res/background/medStar.png");
-    fonts.load(Fonts::Sansation, "../res/fonts/Sansation.ttf");
+    textures.load(Textures::Spaceship, "res/entity/player/Spaceship1.png");
+    textures.load(Textures::Asteroid, "res/entity/objects/asteroid.png");
+    textures.load(Textures::SmallStar, "res/background/smallStar.png");
+    textures.load(Textures::MedStar, "res/background/medStar.png");
+    fonts.load(Fonts::Sansation, "res/fonts/Sansation.ttf");
 }
 
-ResourceHolder<sf::Texture, Textures::ID> *Assets::getTextures(){
-    return &textures;
+sf::Texture *Assets::getTextures(Textures::ID texture){
+    return &textures.get(texture);
 }
 
-ResourceHolder<sf::Font, Fonts::ID> *Assets::getFonts(){
-    return &fonts;
-}*/
+sf::Font *Assets::getFonts(Fonts::ID font){
+    return &fonts.get(font);
+}

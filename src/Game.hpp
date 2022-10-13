@@ -13,6 +13,8 @@
 #include "entity/Entity.hpp"
 #include "entity/Player.hpp"
 #include "Handler.hpp"
+#include "gui/Statistics.hpp"
+#include "gfx/Assets.hpp"
 
 class Game{
     public:
@@ -30,19 +32,17 @@ class Game{
     
     private:
         sf::RenderWindow mWindow;
-        sf::Text mStatisticsText;
-        sf::Time mStatisticsUpdateTime;
         Animation animation;
         KeyManager keyManager;
         Math math;
         GasTank gasTank;
         Asteroid asteroid;
-        Player mPlayer;
+        Player player;
         Handler handler;
+        Statistics statistics;
+        sf::Vector2f screenSize;
+        Assets assets;
 
-        std::size_t mStatisticsNumFrames;
-        ResourceHolder<sf::Texture, Textures::ID> textures;
-        ResourceHolder<sf::Font, Fonts::ID> fonts;
 };
 #endif
 

@@ -1,4 +1,4 @@
-/*#ifndef GFX_ASSETS_HPP
+#ifndef GFX_ASSETS_HPP
 #define GFX_ASSETS_HPP
 
 #include "ResourceHolder.hpp"
@@ -7,8 +7,8 @@
 class Assets{
     public:
         Assets();
-        ResourceHolder<sf::Texture, Textures::ID> *getTextures();
-        ResourceHolder<sf::Font, Fonts::ID> *getFonts();
+        sf::Texture *getTextures(Textures::ID texture);
+        sf::Font *getFonts(Fonts::ID texture);
 
     private:
         ResourceHolder<sf::Texture, Textures::ID> textures;
@@ -16,4 +16,4 @@ class Assets{
 };
 
 
-#endif*/
+#endif

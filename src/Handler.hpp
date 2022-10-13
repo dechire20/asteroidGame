@@ -13,6 +13,7 @@ class Handler{
         KeyManager getKeyManager();
         Game *getGame();
         GasTank getGasTank();
+        sf::Vector2f getScreenSize();
 
     private:
         Game *game;
