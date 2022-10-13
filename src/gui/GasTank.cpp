@@ -14,10 +14,10 @@ GasTank::GasTank(){
 }
 
 void GasTank::update(KeyManager *mKeyManager){
-    if (mKeyManager->boost && currentValue >= 0){
-        currentValue -= fuelCost;
+    if (mKeyManager->boost && currentValue >= maxValue){
+        currentValue = 0;
     }
-    else if (currentValue <= maxValue){
+    else if (currentValue <= maxValue && !mKeyManager->boost){
         currentValue += 0.5;
     }
 

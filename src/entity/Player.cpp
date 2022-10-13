@@ -4,9 +4,10 @@
 
 void Player::init(Handler *handler, sf::Texture *texture){
     DEFAULT_SPEED = 400;
+    dashLenght = 13000.f;
     currentSpeed = DEFAULT_SPEED;
     this->handler = handler;
-    Entity::init(&mPlayer, texture, {handler->getGame()->getScreenSize().x / 2, handler->getGame()->getScreenSize().y / 2}, 4.f);
+    Entity::init(handler, &mPlayer, texture, {handler->getGame()->getScreenSize().x / 2, handler->getGame()->getScreenSize().y / 2}, 4.f);
     mPlayer.setOrigin(sf::Vector2f(mPlayer.getTexture()->getSize().x / 4, mPlayer.getTexture()->getSize().y / 4));
     animation.init(texture, sf::Vector2u(2, 1), 0.3f);
 }
@@ -30,11 +31,12 @@ void Player::getInput(KeyManager mKeyManager){
     if (mKeyManager.up) mVelocity.y -= currentSpeed;
     if (mKeyManager.down) mVelocity.y += currentSpeed;
 
-    if (mKeyManager.boost && handler->getGasTank().getCurrentValue()){
-        currentSpeed += 3;
+    if (mKeyManager.boost && !isDashing && handler->getGasTank().getCurrentValue() == 0){
+        mVelocity = math.normalize(mVelocity) * dashLenght;
+        isDashing = true;
     }
-    else if (handler->getGasTank().getCurrentValue() <= handler->getGasTank().getMaxValue()){
-        currentSpeed = DEFAULT_SPEED;
+    else if (isDashing && !mKeyManager.boost){
+        isDashing = false;
     }
 }
 

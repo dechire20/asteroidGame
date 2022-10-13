@@ -16,7 +16,7 @@ statistics(),
 screenSize(SCREENSIZE)
 {
     player.init(&handler, assets.getTextures(Textures::Spaceship));
-    asteroid.init(assets.getTextures(Textures::Asteroid));
+    asteroid.init(&handler, assets.getTextures(Textures::Asteroid));
     statistics.init(&handler, assets.getFonts(Fonts::Sansation));
 }
 
@@ -69,7 +69,7 @@ void Game::update(sf::Time elapsedTime){
     gasTank.update(&keyManager);
     asteroid.update(player.getPosition(), elapsedTime);
     player.update(elapsedTime);
-
+    //std::cout << gasTank.getCurrentValue() << " -- " << gasTank.getMaxValue() << std::endl;
 }
 
 void Game::render(){

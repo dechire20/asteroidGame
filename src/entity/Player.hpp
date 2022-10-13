@@ -3,6 +3,7 @@
 
 #include "Entity.hpp"
 #include "../input/KeyManager.hpp"
+#include "../util/Math.hpp"
 
 class Game;
 class Handler;
@@ -22,9 +23,12 @@ class Player : public Entity{
         sf::Vector2f mVelocity;
         sf::Sprite mPlayer;
         Handler *handler;
+        Math math;
 
         float DEFAULT_SPEED;
         float currentSpeed;
+        float dashLenght;
+        bool isDashing{false};
 };
 
 #endif
