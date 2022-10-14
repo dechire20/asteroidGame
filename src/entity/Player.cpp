@@ -7,9 +7,13 @@ void Player::init(Handler *handler, sf::Texture *texture){
     dashLenght = 13000.f;
     currentSpeed = DEFAULT_SPEED;
     this->handler = handler;
+
     Entity::init(handler, &mPlayer, texture, {handler->getGame()->getScreenSize().x / 2, handler->getGame()->getScreenSize().y / 2}, 4.f);
     mPlayer.setOrigin(sf::Vector2f(mPlayer.getTexture()->getSize().x / 4, mPlayer.getTexture()->getSize().y / 4));
     animation.init(texture, sf::Vector2u(2, 1), 0.3f);
+
+    boundingBox.setSize({60.f, 40.f});
+    boundingBox.setOrigin({boundingBox.getSize().x / 2, boundingBox.getSize().y / 2});
 }
 
 void Player::move(sf::Time elapsedTime){
@@ -19,6 +23,7 @@ void Player::move(sf::Time elapsedTime){
 void Player::update(sf::Time elapsedTime){
     getInput(handler->getKeyManager());
     move(elapsedTime);
+    boundingBox.setPosition({mPlayer.getPosition().x - 1, mPlayer.getPosition().y + 30});
 
     animation.update(0, elapsedTime.asSeconds());
     mPlayer.setTextureRect(animation.uvRect);
@@ -31,7 +36,7 @@ void Player::getInput(KeyManager mKeyManager){
     if (mKeyManager.up) mVelocity.y -= currentSpeed;
     if (mKeyManager.down) mVelocity.y += currentSpeed;
 
-    if (mKeyManager.boost && !isDashing && handler->getGasTank().getCurrentValue() == 0){
+    if (mKeyManager.boost && !isDashing /*&& handler->getGasTank().getCurrentValue() == 0*/){
         mVelocity = math.normalize(mVelocity) * dashLenght;
         isDashing = true;
     }

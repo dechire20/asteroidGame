@@ -12,13 +12,15 @@ class Entity{
         float getWidth();
         float getHeight();
         sf::Sprite *getSprite();
-        bool outOfBounds(sf::Vector2f position);
+        bool outOfBounds();
+        sf::RectangleShape getBoundingBox();
 
     protected:
         sf::Vector2f position;
         sf::Sprite *sprite;
         Animation animation;
         float scale;
+        sf::RectangleShape boundingBox;
         Handler *handler;
 };
 

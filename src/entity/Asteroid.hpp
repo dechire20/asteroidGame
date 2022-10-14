@@ -19,7 +19,7 @@ class Asteroid : public Entity{
         sf::Sprite asteroid;
         sf::Vector2f targetPosition;
         Math math;
-        int speed;
+        int speed{100};
         int posOutside[4];
         int randomPosition;
         float randX;
