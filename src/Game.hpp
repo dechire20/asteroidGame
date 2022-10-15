@@ -6,7 +6,7 @@
 #include <string.h>
 #include <iostream>
 #include "gfx/Animation.hpp"
-#include "input/KeyManager.hpp"
+#include "util/KeyManager.hpp"
 #include "util/Math.hpp"
 #include "gui/GasTank.hpp"
 #include "entity/Asteroid.hpp"
@@ -23,6 +23,7 @@ class Game{
         sf::Vector2f getScreenSize();
         KeyManager getKeyManager();
         GasTank getGasTank();
+        sf::RectangleShape *getAsteroidBoundingBox();
 
     private:
         void processEvents();

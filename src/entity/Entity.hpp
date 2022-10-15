@@ -4,6 +4,7 @@
 #include "SFML/Graphics.hpp"
 #include "../gfx/Animation.hpp"
 #include "../Handler.hpp"
+#include "../util/AABB.hpp"
 
 class Entity{
     public:
@@ -12,8 +13,8 @@ class Entity{
         float getWidth();
         float getHeight();
         sf::Sprite *getSprite();
-        bool outOfBounds();
-        sf::RectangleShape getBoundingBox();
+        bool outOfBounds(sf::Vector2f position);
+        sf::RectangleShape *getBoundingBox();
 
     protected:
         sf::Vector2f position;
@@ -22,6 +23,7 @@ class Entity{
         float scale;
         sf::RectangleShape boundingBox;
         Handler *handler;
+        AABB aabb;
 };
 
 #endif

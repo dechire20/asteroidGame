@@ -1,5 +1,5 @@
-#ifndef INPUT_KEYMANAGER_HPP
-#define INPUT_KEYMANAGER_HPP
+#ifndef UTIL_KEYMANAGER_HPP
+#define UTIL_KEYMANAGER_HPP
 
 #include "SFML/Graphics.hpp"
 

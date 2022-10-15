@@ -2,7 +2,7 @@
 #define GUI_GASTANK_HPP
 
 #include "SFML/Graphics.hpp"
-#include "../input/KeyManager.hpp"
+#include "../util/KeyManager.hpp"
 
 class GasTank{
     public:

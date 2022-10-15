@@ -14,18 +14,17 @@ void Entity::init(Handler *handler, sf::Sprite *sprite, sf::Texture *texture, sf
     sprite->setPosition(position);
 
     // Bounding box
-    boundingBox.setPosition(position); // default
-    boundingBox.setSize({20.f, 20.f}); // default
-    boundingBox.setOrigin(boundingBox.getSize().x / 2, boundingBox.getSize().y / 2);
-    boundingBox.setFillColor(sf::Color::Red);
+    boundingBox.setFillColor(sf::Color::Transparent);
+    boundingBox.setOutlineColor(sf::Color::Red);
+    boundingBox.setOutlineThickness(5);
 }
 
-bool Entity::outOfBounds(){
+bool Entity::outOfBounds(sf::Vector2f position){
 
-    if (boundingBox.getPosition().x >= handler->getScreenSize().x || boundingBox.getPosition().x <= 0){
+    if (position.x >= handler->getScreenSize().x || position.x <= 0){
         return true;
     }
-    else if (boundingBox.getPosition().y >= handler->getScreenSize().y || boundingBox.getPosition().y <= 0){
+    else if (position.y >= handler->getScreenSize().y || position.y <= 0){
         return true;
     }
     
@@ -36,8 +35,8 @@ sf::Sprite *Entity::getSprite(){
     return sprite;
 }
 
-sf::RectangleShape Entity::getBoundingBox(){
-    return boundingBox;
+sf::RectangleShape *Entity::getBoundingBox(){
+    return &boundingBox;
 }
 
 sf::Vector2f Entity::getPosition(){

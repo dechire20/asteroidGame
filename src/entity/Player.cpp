@@ -2,7 +2,9 @@
 #include "../Game.hpp"
 #include "../Handler.hpp"
 
+
 void Player::init(Handler *handler, sf::Texture *texture){
+
     DEFAULT_SPEED = 400;
     dashLenght = 13000.f;
     currentSpeed = DEFAULT_SPEED;
@@ -14,6 +16,7 @@ void Player::init(Handler *handler, sf::Texture *texture){
 
     boundingBox.setSize({60.f, 40.f});
     boundingBox.setOrigin({boundingBox.getSize().x / 2, boundingBox.getSize().y / 2});
+
 }
 
 void Player::move(sf::Time elapsedTime){
@@ -23,7 +26,10 @@ void Player::move(sf::Time elapsedTime){
 void Player::update(sf::Time elapsedTime){
     getInput(handler->getKeyManager());
     move(elapsedTime);
+
     boundingBox.setPosition({mPlayer.getPosition().x - 1, mPlayer.getPosition().y + 30});
+    aabb.update(boundingBox);
+    std::cout << aabb.collides(*handler->getAsteroidBoundingBox()) << std::endl;
 
     animation.update(0, elapsedTime.asSeconds());
     mPlayer.setTextureRect(animation.uvRect);
@@ -43,6 +49,7 @@ void Player::getInput(KeyManager mKeyManager){
     else if (isDashing && !mKeyManager.boost){
         isDashing = false;
     }
+
 }
 
 sf::Vector2f Player::getPosition(){

@@ -2,7 +2,7 @@
 #define ENTITY_PLAYER_HPP
 
 #include "Entity.hpp"
-#include "../input/KeyManager.hpp"
+#include "../util/KeyManager.hpp"
 #include "../util/Math.hpp"
 
 class Game;

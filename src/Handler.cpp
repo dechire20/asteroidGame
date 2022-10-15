@@ -20,3 +20,7 @@ GasTank Handler::getGasTank(){
 sf::Vector2f Handler::getScreenSize(){
     return game->getScreenSize();
 }
+
+sf::RectangleShape *Handler::getAsteroidBoundingBox(){
+    return game->getAsteroidBoundingBox();
+}
