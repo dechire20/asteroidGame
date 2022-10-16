@@ -15,6 +15,8 @@ class Player : public Entity{
         void update(sf::Time elapsedTime);
         sf::Vector2f getPosition();
         float getSpeed();
+        void xMove(sf::Time elapsedTime);
+        void yMove(sf::Time elapsedTime);
     
     private:
         void getInput(KeyManager mKeyManager);
@@ -29,6 +31,12 @@ class Player : public Entity{
         float currentSpeed;
         float dashLenght;
         bool isDashing{false};
+        float minX;
+        float minY;
+        float maxX;
+        float maxY;
+        float xMoveValue{0};
+        float yMoveValue{0};
 };
 
 #endif

@@ -16,7 +16,7 @@ void Entity::init(Handler *handler, sf::Sprite *sprite, sf::Texture *texture, sf
     // Bounding box
     boundingBox.setFillColor(sf::Color::Transparent);
     boundingBox.setOutlineColor(sf::Color::Red);
-    boundingBox.setOutlineThickness(5);
+    boundingBox.setOutlineThickness(1);
 }
 
 bool Entity::outOfBounds(sf::Vector2f position){

@@ -69,7 +69,6 @@ void Game::update(sf::Time elapsedTime){
     gasTank.update(&keyManager);
     asteroid.update(player.getBoundingBox()->getPosition(), elapsedTime);
     player.update(elapsedTime);
-    //std::cout << gasTank.getCurrentValue() << " -- " << gasTank.getMaxValue() << std::endl;
 }
 
 void Game::render(){

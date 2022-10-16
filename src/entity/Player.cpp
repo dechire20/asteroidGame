@@ -14,13 +14,23 @@ void Player::init(Handler *handler, sf::Texture *texture){
     mPlayer.setOrigin(sf::Vector2f(mPlayer.getTexture()->getSize().x / 4, mPlayer.getTexture()->getSize().y / 4));
     animation.init(texture, sf::Vector2u(2, 1), 0.3f);
 
-    boundingBox.setSize({60.f, 40.f});
+    boundingBox.setSize({90.f, 50.f});
     boundingBox.setOrigin({boundingBox.getSize().x / 2, boundingBox.getSize().y / 2});
 
 }
 
 void Player::move(sf::Time elapsedTime){
-    mPlayer.move(mVelocity * elapsedTime.asSeconds());
+    minX = boundingBox.getPosition().x - (boundingBox.getSize().x / 2) + (mVelocity * elapsedTime.asSeconds()).x;
+    minY = boundingBox.getPosition().y - (boundingBox.getSize().y / 2) + (mVelocity * elapsedTime.asSeconds()).y;
+    maxX = boundingBox.getPosition().x + (boundingBox.getSize().x / 2) + (mVelocity * elapsedTime.asSeconds()).x;
+    maxY = boundingBox.getPosition().y + (boundingBox.getSize().y / 2) + (mVelocity * elapsedTime.asSeconds()).y; 
+    position.x = 0;
+    position.y = 0;
+
+    xMove(elapsedTime);
+    yMove(elapsedTime);
+
+    mPlayer.move(position);
 }
 
 void Player::update(sf::Time elapsedTime){
@@ -29,10 +39,10 @@ void Player::update(sf::Time elapsedTime){
 
     boundingBox.setPosition({mPlayer.getPosition().x - 1, mPlayer.getPosition().y + 30});
     aabb.update(boundingBox);
-    std::cout << aabb.collides(*handler->getAsteroidBoundingBox()) << std::endl;
 
     animation.update(0, elapsedTime.asSeconds());
     mPlayer.setTextureRect(animation.uvRect);
+
 }
 
 void Player::getInput(KeyManager mKeyManager){
@@ -42,7 +52,7 @@ void Player::getInput(KeyManager mKeyManager){
     if (mKeyManager.up) mVelocity.y -= currentSpeed;
     if (mKeyManager.down) mVelocity.y += currentSpeed;
 
-    if (mKeyManager.boost && !isDashing /*&& handler->getGasTank().getCurrentValue() == 0*/){
+    if (mKeyManager.boost && !isDashing && handler->getGasTank().getCurrentValue() == 0){
         mVelocity = math.normalize(mVelocity) * dashLenght;
         isDashing = true;
     }
@@ -51,6 +61,37 @@ void Player::getInput(KeyManager mKeyManager){
     }
 
 }
+
+void Player::xMove(sf::Time elapsedTime){
+    xMoveValue = mVelocity.x * elapsedTime.asSeconds();
+
+    if (xMoveValue > 0){
+        if (!outOfBounds({maxX, minY}) && !outOfBounds({maxX, maxY})){
+            position.x += xMoveValue;
+        }
+    }
+    else if (xMoveValue < 0){
+        if (!outOfBounds({minX, minY}) && !outOfBounds({minX, maxY})){
+            position.x += xMoveValue;
+        }
+    }
+}
+
+void Player::yMove(sf::Time elapsedTime){
+    yMoveValue = mVelocity.y * elapsedTime.asSeconds();
+
+    if (yMoveValue > 0){
+        if (!outOfBounds({minX, maxY}) && !outOfBounds({maxX, maxY})){
+            position.y += yMoveValue;
+        }
+    }
+    else if (yMoveValue < 0){
+        if (!outOfBounds({minX, minY}) && !outOfBounds({maxX, minY})){
+            position.y += yMoveValue;
+        }
+    }
+}
+
 
 sf::Vector2f Player::getPosition(){
     return mPlayer.getPosition();
