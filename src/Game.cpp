@@ -3,7 +3,7 @@
 sf::Vector2f const SCREENSIZE{1000, 700};
 
 Game::Game():
-mWindow(sf::VideoMode(SCREENSIZE.x, SCREENSIZE.y), "Deliver the package", sf::Style::Close),
+mWindow(sf::VideoMode(SCREENSIZE.x, SCREENSIZE.y), "mors", sf::Style::Close),
 assets(),
 animation(),
 keyManager(),
@@ -15,8 +15,8 @@ handler(this),
 statistics(),
 screenSize(SCREENSIZE)
 {
-    player.init(&handler, assets.getTextures(Textures::Spaceship));
-    asteroid.init(&handler, assets.getTextures(Textures::Asteroid));
+    player.init(&handler, assets.getTextures(Textures::Spaceship), assets.getFonts(Fonts::Sansation));
+    asteroid.init(&handler, assets.getTextures(Textures::Asteroid), player.getPointsCounter());
     statistics.init(&handler, assets.getFonts(Fonts::Sansation));
 }
 
@@ -35,7 +35,6 @@ void Game::run(){
 			processEvents();
 			update(timePerFrame);
 		}
-        statistics.update(elapsedTime);
 		render();
 	}    
 }
@@ -69,6 +68,7 @@ void Game::update(sf::Time elapsedTime){
     gasTank.update(&keyManager);
     asteroid.update(player.getBoundingBox()->getPosition(), elapsedTime);
     player.update(elapsedTime);
+    statistics.update(elapsedTime);
 }
 
 void Game::render(){
@@ -81,6 +81,7 @@ void Game::render(){
     // gui
     mWindow.draw(gasTank.getGasTank());
     mWindow.draw(statistics.getStatistics());
+    mWindow.draw(*player.getTextCounter());
     mWindow.display();
 }
 

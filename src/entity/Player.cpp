@@ -3,7 +3,7 @@
 #include "../Handler.hpp"
 
 
-void Player::init(Handler *handler, sf::Texture *texture){
+void Player::init(Handler *handler, sf::Texture *texture, sf::Font *font){
 
     DEFAULT_SPEED = 400;
     dashLenght = 13000.f;
@@ -16,7 +16,10 @@ void Player::init(Handler *handler, sf::Texture *texture){
 
     boundingBox.setSize({90.f, 50.f});
     boundingBox.setOrigin({boundingBox.getSize().x / 2, boundingBox.getSize().y / 2});
-
+    
+    counter.setPosition(handler->getScreenSize().x / 2, 10);
+    counter.setFont(*font);
+    counter.setCharacterSize(40);
 }
 
 void Player::move(sf::Time elapsedTime){
@@ -36,10 +39,11 @@ void Player::move(sf::Time elapsedTime){
 void Player::update(sf::Time elapsedTime){
     getInput(handler->getKeyManager());
     move(elapsedTime);
-
+    deathState();
     boundingBox.setPosition({mPlayer.getPosition().x - 1, mPlayer.getPosition().y + 30});
     aabb.update(boundingBox);
 
+    counter.setString(std::to_string(pointsCounter));
     animation.update(0, elapsedTime.asSeconds());
     mPlayer.setTextureRect(animation.uvRect);
 
@@ -92,6 +96,19 @@ void Player::yMove(sf::Time elapsedTime){
     }
 }
 
+void Player::deathState(){
+    if (aabb.collides(*handler->getAsteroidBoundingBox())){
+        pointsCounter = 0;
+    }
+}
+
+int *Player::getPointsCounter(){
+    return &pointsCounter;
+}
+
+sf::Text *Player::getTextCounter(){
+    return &counter;
+}
 
 sf::Vector2f Player::getPosition(){
     return mPlayer.getPosition();

@@ -7,9 +7,10 @@ posOutside{-11, -10, 710, 1010} // -11 and 1010 is x, -10 and 710 is y
     hasSpawned = true;
 }
 
-void Asteroid::init(Handler *handler, sf::Texture *texture){
+void Asteroid::init(Handler *handler, sf::Texture *texture, int *counter){
     srand(time(0));
     speed = 300;
+    this->counter = counter;
 
     Entity::init(handler, &asteroid, texture, {100.f, 100.f}, 5.f);
     asteroid.setOrigin(asteroid.getTexture()->getSize().x / 2, asteroid.getTexture()->getSize().y / 2);
@@ -28,6 +29,7 @@ void Asteroid::update(sf::Vector2f targetPos, sf::Time elapsedTime){
     }
     else if (!hasSpawned && outOfBounds(boundingBox.getPosition())){
         asteroid.setPosition(getRandomPosition());
+        *counter += 1;
         targetPosition = targetPos - asteroid.getPosition();
         speed = rand() % 1000 + 200;
         hasSpawned = true;

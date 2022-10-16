@@ -10,7 +10,7 @@
 class Asteroid : public Entity{
     public:
         Asteroid();
-        void init(Handler *handler, sf::Texture *texture);
+        void init(Handler *handler, sf::Texture *texture, int *counter);
         void update(sf::Vector2f targetPosition, sf::Time elapsedTime);
         sf::Vector2f getRandomPosition();
         float getSpeed();
@@ -25,6 +25,7 @@ class Asteroid : public Entity{
         float randX;
         float randY;
         bool hasSpawned;
+        int *counter;
 };
 
 #endif

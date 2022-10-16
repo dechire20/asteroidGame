@@ -10,13 +10,16 @@ class Handler;
 
 class Player : public Entity{
     public:
-        void init(Handler *handler, sf::Texture *texture);
+        void init(Handler *handler, sf::Texture *texture, sf::Font *font);
         void move(sf::Time elapsedTime);
         void update(sf::Time elapsedTime);
         sf::Vector2f getPosition();
         float getSpeed();
         void xMove(sf::Time elapsedTime);
         void yMove(sf::Time elapsedTime);
+        void deathState();
+        int *getPointsCounter();
+        sf::Text *getTextCounter();
     
     private:
         void getInput(KeyManager mKeyManager);
@@ -24,6 +27,7 @@ class Player : public Entity{
     private:
         sf::Vector2f mVelocity;
         sf::Sprite mPlayer;
+        sf::Text counter;
         Handler *handler;
         Math math;
 
@@ -37,6 +41,7 @@ class Player : public Entity{
         float maxY;
         float xMoveValue{0};
         float yMoveValue{0};
+        int pointsCounter;
 };
 
 #endif
