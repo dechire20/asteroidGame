@@ -1,7 +1,6 @@
 #ifndef ENTITY_ENTITY_HPP
 #define ENTITY_ENTITY_HPP
 
-#include "SFML/Graphics.hpp"
 #include "../gfx/Animation.hpp"
 #include "../Handler.hpp"
 #include "../util/AABB.hpp"

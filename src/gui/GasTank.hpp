@@ -1,7 +1,6 @@
 #ifndef GUI_GASTANK_HPP
 #define GUI_GASTANK_HPP
 
-#include "SFML/Graphics.hpp"
 #include "../util/KeyManager.hpp"
 
 class GasTank{
