@@ -1,5 +1,5 @@
 output: a
-	g++ *.o -o main -lsfml-graphics -lsfml-window -lsfml-system;
+	g++ *.o -o mors -lsfml-graphics -lsfml-window -lsfml-system;
 	rm -rf *.o
 
 a: src/**/*.cpp

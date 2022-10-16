@@ -75,8 +75,6 @@ void Game::render(){
     mWindow.clear();
     mWindow.draw(*player.getSprite());
     mWindow.draw(*asteroid.getSprite());
-    mWindow.draw(*player.getBoundingBox());
-    mWindow.draw(*asteroid.getBoundingBox());
 
     // gui
     mWindow.draw(gasTank.getGasTank());
