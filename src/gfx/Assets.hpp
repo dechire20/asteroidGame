@@ -2,7 +2,7 @@
 #define GFX_ASSETS_HPP
 
 #include "ResourceHolder.hpp"
-#include "../../lib/sfml/Graphics.hpp"
+#include "../../lib/SFML/include/SFML/Graphics.hpp"
 
 class Assets{
     public:

@@ -1,7 +1,7 @@
 #ifndef GFX_ANIMATION_HPP
 #define GFX_ANIMATION_HPP
 
-#include "../../lib/sfml/Graphics.hpp"
+#include "../../lib/SFML/include/SFML/Graphics.hpp"
 
 class Animation{
     public:

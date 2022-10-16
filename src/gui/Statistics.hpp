@@ -1,7 +1,7 @@
 #ifndef GUI_STATISTICS_HPP
 #define GUI_STATISTICS_HPP
 
-#include "../../lib/sfml/Graphics.hpp"
+#include "../../lib/SFML/include/SFML/Graphics.hpp"
 
 class Handler;
 class Game;

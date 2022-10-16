@@ -1,7 +1,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "../lib/sfml/Graphics.hpp"
+#include "../lib/SFML/include/SFML/Graphics.hpp"
 #include "gfx/ResourceHolder.hpp"
 #include <string.h>
 #include <iostream>

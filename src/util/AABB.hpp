@@ -1,7 +1,7 @@
 #ifndef UTIL_AABB_HPP
 #define UTIL_AABB_HPP
 
-#include "../../lib/sfml/Graphics.hpp"
+#include "../../lib/SFML/include/SFML/Graphics.hpp"
 
 class AABB{
     public:

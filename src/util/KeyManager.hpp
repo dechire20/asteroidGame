@@ -1,7 +1,7 @@
 #ifndef UTIL_KEYMANAGER_HPP
 #define UTIL_KEYMANAGER_HPP
 
-#include "../../lib/sfml/Graphics.hpp"
+#include "../../lib/SFML/include/SFML/Graphics.hpp"
 
 class KeyManager{
     public:

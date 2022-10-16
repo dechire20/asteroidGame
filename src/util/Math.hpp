@@ -1,7 +1,7 @@
 #ifndef UTIL_FMATH_HPP
 #define UTIL_FMATH_HPP
 
-#include "../../lib/sfml/Graphics.hpp"
+#include "../../lib/SFML/include/SFML/Graphics.hpp"
 #include "math.h"
 
 class Math{
